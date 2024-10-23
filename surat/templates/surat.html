@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persuratan</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        background-color: #6c9bc7;
+        width: 25%;
+        padding: 20px;
+        color: white;
+      }
+
+      .sidebar h2 {
+        margin-bottom: 40px;
+        font-size: 24px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        margin-top: 20px;
+      }
+
+      .sidebar ul li {
+        padding: 10px 0;
+        font-size: 18px;
+      }
+
+      .sidebar ul li:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .content {
+        width: 75%;
+        padding: 40px;
+        background-color: #f4f4f4;
+      }
+
+      .content h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table th,
+      table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      .btn-add {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #7ab2d3;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .btn-add:hover {
+        background-color: #b9e5e8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <h2 style="margin-bottom: 5px">Persuratan</h2>
+        <h4>Lukman</h4>
+        <ul>
+          <li>
+            <a href="{% url 'suratMasuk'%}?jenis=1">Surat Masuk</a>
+          </li>
+          <li>
+            <a href="{% url 'suratKeluar'%}?jenis=2">Surat Keluar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h1 style="display: inline-block">{{ title }}</h1>
+        <!-- <a
+          href="{% url 'formSurat'%}?j=2"
+          class="btn-add"
+          style="float: right; margin-left: 10px"
+          >Tambah</a
+        > -->
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Perihal</th>
+              <th>Status</th>
+              <th>Kategori</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if surat %} {% for surat in surat %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ surat.prihal }}</td>
+              <td>{{ surat.status }}</td>
+              <td>{{ surat.kategori }}</td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+              <td colspan="4">No data available</td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
